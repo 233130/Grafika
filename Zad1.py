@@ -57,18 +57,19 @@ def kostka():
 
 def rotate():
     glPushMatrix()
-    glTranslatef(m_transX, m_transY, 0)
+    glTranslatef(0.05 * m_transX, 0.05 * m_transY, 0)
     glRotatef(m_angle1, 0, -1, 0)
     glRotatef(m_angle2, -1, 0, 0)
     glCallList(ArmPart)
     glPopMatrix()
+
 
 ##main
 pygame.init()
 display = (800, 600)
 pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
 gluPerspective(45, (display[0] / display[1]), 1, 10.0);
-glTranslate(0.0, 0.0, -5)
+glTranslate(0.0, 0.0, -10)
 ArmPart = glGenLists(1)
 glNewList(ArmPart, GL_COMPILE);
 # ustawianie światła
@@ -92,7 +93,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            sys.exit(0)
+            quit()
         elif event.type == pygame.MOUSEMOTION:
             if m_LeftButtonDown:
                 m_angle1 += m_LeftDownPos[0] - event.pos[0];
